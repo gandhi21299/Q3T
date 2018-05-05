@@ -249,10 +249,7 @@ class Game:
         # ;kjhsadfkjhasd;kfjhadskjfhlaksdjfhlkjasdfhlkjasdhflkjadhflkjhdflkjsahfdlkj
 
         #not sure where this line should come, so do see to it.
-        self.score[move.markValue[0]] += 2*self.degree(move.posList[0])
-
-
-
+        self.score[move.markValue[0]] += 2*self.degree(move.posList[0]
 
         for mark in marksList:
             for pos1 in self.board.keys():
@@ -339,7 +336,7 @@ class Game:
         nbd_cells = []
         for i in [-1,0,1]:
             for j in [-1, 0, 1]:
-                if (i!= 0 and j!=0):
+                if (i or j):
                     if(self.isValidCell((pos[0] + i, pos[1] + j)) and self.board[(pos[0] + i, pos[1] + j)].stable is not None):
                         nbd_cells.append((pos[0] + i, pos[1] + j))
         return nbd_cells
