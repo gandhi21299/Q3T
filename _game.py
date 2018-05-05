@@ -238,18 +238,13 @@ class Game:
         Recursively perform this operation until each cell in the cycle
         is evaluated.
         '''
-
         self.updateMovesHistory(move)
         marksList = self.board[move.posList[0]].marksList[:]
         marksList.remove(move.markValue)
 
         self.board[move.posList[0]].stable = move.markValue
 
-
-        # ;kjhsadfkjhasd;kfjhadskjfhlaksdjfhlkjasdfhlkjasdhflkjadhflkjhdflkjsahfdlkj
-
-        #not sure where this line should come, so do see to it.
-        self.score[move.markValue[0]] += 2*self.degree(move.posList[0]
+        self.score[move.markValue[0]] += 2*self.degree(move.posList[0])
 
         for mark in marksList:
             for pos1 in self.board.keys():
