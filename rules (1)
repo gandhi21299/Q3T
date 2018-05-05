@@ -1,0 +1,35 @@
+Game description
+------------------------------------------------------
+Quantum tic-tac-toe is a 'quantum generalization' of tic-tac-toe in which the players' moves are superpositions of plays in the classical game. 
+
+Properties:
+- Superposition: the ability of quantum objects to be in two places at once.
+
+- Entanglement:  the phenomenon where distant parts of a quantum system display correlations that cannot be explained by either timelike causality or common cause.
+
+- Collapse:      the phenomenon where the quantum states of a system are reduced to classical states.
+
+Gameplay
+------------------------------------------------------
+- Quantum tic-tac-toe is played on a 4x4 board.
+
+- Players will take turns marking squares on the board.
+
+- 'X' always starts.
+
+- On each move, the player places their mark in two distinct cells on the board. The move number is appended every mark for specifying the twin marks.
+
+- Suppose each twin connects the two cells each mark belongs in and player X played a move such that a cycle connects some subset of cells on the board. Then O must choose one of the most recent X marks, indicating the mark that should be evaluated in that cell. Suppose X3 evaluates in some cell a. Then every other mark in a must take over the cell, not a, in which their twin exists. Hence, evaluating each cell in the cycle. O then continues its move.
+
+- The game terminates either if the goal is satisfied or every cell on the board evaluates.
+
+- Bonus Points: 
+	(1) A row, column or diagonal with three marks is worth 1 point. 
+	
+	(2) A 2 x 2 board completely evaluated with the same mark is worth 2 points to that player. 
+
+	(3) A row, column or diagonal with four marks is worth 20 points.
+
+- Game terminates when case (3) satisfies above. Suppose two players satisfies (3), then the player with the row/column/diagonal that has the minimum sum of the move number, appended to each mark in that row/column/diagonal, earns 15 points. The opponent earns 5 points. If the game ends in a draw, each player earns 10 points.
+
+- Goal: Maximize your total points.
