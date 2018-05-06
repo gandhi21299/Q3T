@@ -113,8 +113,8 @@ class Game:
         if self.movesTree is None:
             self.movesTree = MoveNode()
 
+        # Compute key for the move to be processed.
         key = 0
-
         if move.isCollapse():
             key = 1
             key = key << 4
@@ -128,9 +128,10 @@ class Game:
             key = key << 4
             key += self.getCellIndex(move.posList[1])
 
+        # Add move to the tree.
         self.movesTree.add_child(key, move)
 
-        # update movesTree
+        # Update movesTree
         self.movesTree = self.movesTree.children[key]
 
     def entangle(self, pos0, pos1):
@@ -189,9 +190,7 @@ class Game:
         
         # Perform 'anti-collapse' move
         lastMove = self.movesTree
-
         undoCompleted = False
-
         while self.movesTree.move.isCollapse() and self.movesTree.parent is not None:
             self.board[self.movesTree.move.posList[0]].stable = None
             self.movesTree = self.movesTree.parent
@@ -237,21 +236,31 @@ class Game:
         classical states wherever they exist apart from 'pos0'. 
         Recursively perform this operation until each cell in the cycle
         is evaluated.
+
+        Scores are updated as a cell is turned into a classical state.
         '''
         self.updateMovesHistory(move)
+
+        # Get a list marks in the target cell. Remove the mark that is
+        # collapsing in the target cell.
         marksList = self.board[move.posList[0]].marksList[:]
         marksList.remove(move.markValue)
 
+        # Assign the classical state of the target cell.
         self.board[move.posList[0]].stable = move.markValue
 
+        # Update the score.
         self.score[move.markValue[0]] += 2*self.degree(move.posList[0])
 
+        # For each mark in 'marksList', find their respective twin location.
+        # Recursively play a collapse move on that cell.
         for mark in marksList:
             for pos1 in self.board.keys():
                 if mark in self.board[pos1].marksList and not self.board[pos1].stable:
                     self.evaluateCell(Move(mark, [pos1]))
                     break
 
+        # Collapse procedure has terminated.
         self.cycleDetected = False
 
     def printTree(self, file=None):
@@ -313,6 +322,9 @@ class Game:
         state of the board.
 
         NEED TO TEST
+
+        Implement in server.py for player-computer 
+        interaction.
         '''
         if self.cycleDetected:
             return self.movesTree.move.posList
@@ -328,9 +340,9 @@ class Game:
 
 
     def neighbourhoodCells(self, pos):
-        nbd_cells = []
+        nbd_cells = list()
         for i in [-1,0,1]:
-            for j in [-1, 0, 1]:
+            for j in [-1,0,1]:
                 if (i or j):
                     if(self.isValidCell((pos[0] + i, pos[1] + j)) and self.board[(pos[0] + i, pos[1] + j)].stable is not None):
                         nbd_cells.append((pos[0] + i, pos[1] + j))

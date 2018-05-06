@@ -11,15 +11,90 @@ Properties:
 
 Gameplay
 ------------------------------------------------------
-- Quantum tic-tac-toe is played on a 4x4 board.
+- Quantum tic-tac-toe is played on a square board. Denote n as the number
+	of rows/columns. Initially the board is empty.
 
-- Players will take turns marking squares on the board.
+- Players take turns by placing a mark in two distinct cells on the board.
 
-- 'X' always starts.
+For example, X plays on (3,1) and (3,3). Following, O plays on 
+	(0,2) and (0,3). Then the board configuration looks like the
+	following:
 
-- On each move, the player places their mark in two distinct cells on the board. The move number is appended every mark for specifying the twin marks.
 
-- Suppose each twin connects the two cells each mark belongs in and player X played a move such that a cycle connects some subset of cells on the board. Then O must choose one of the most recent X marks, indicating the mark that should be evaluated in that cell. Suppose X3 evaluates in some cell a. Then every other mark in a must take over the cell, not a, in which their twin exists. Hence, evaluating each cell in the cycle. O then continues its move.
+      0            1            2            3      
+    ----------------------------------------------------
+   |             |            |o2          |o2          |
+0  |             |            |            |            |  0
+   |             |            |            |            |
+   |             |            |            |            |
+    ----------------------------------------------------
+   |             |            |            |            |
+1  |             |            |            |            |  1
+   |             |            |            |            |
+   |             |            |            |            |
+    ----------------------------------------------------
+   |             |            |            |            |
+2  |             |            |            |            |  2
+   |             |            |            |            |
+   |             |            |            |            |
+    ----------------------------------------------------
+   |             |x1          |            |x1          |
+3  |             |            |            |            |  3
+   |             |            |            |            |
+   |             |            |            |            |
+    ----------------------------------------------------
+      0            1            2            3      
+
+
+- By superposition, each pair of marks with the same mark value, 
+	,i.e., the mark and the move number concatenated. eg. 'x1',
+	are connected. This interaction causes the cells to connect
+	to other cells. In the example above, x1 causes a connection
+	between the cells (3,1) and (3,3).
+
+- Eventually, these connections form a cyclic entanglement on
+	the board. A cyclic entanglement occurs when a several cells
+	in a chain form a cycle. Consider the following example, 
+	cells (0,0), (0,1) and (1,0) are connected in a cycle.
+
+
+      0            1            2            3      
+    ----------------------------------------------------
+   | x1  x3      | x1  o2     |            |            |
+0  |             |            |            |            |  0
+   |             |            |            |            |
+   |             |            |            |            |
+    ----------------------------------------------------
+   | o2  x3      |            |            |            |
+1  |             |            |            |            |  1
+   |             |            |            |            |
+   |             |            |            |            |
+    ----------------------------------------------------
+   |             |            |            |            |
+2  |             |            |            |            |  2
+   |             |            |            |            |
+   |             |            |            |            |
+    ----------------------------------------------------
+   |             |            |            |            |
+3  |             |            |            |            |  3
+   |             |            |            |            |
+   |             |            |            |            |
+    ----------------------------------------------------
+      0            1            2            3      
+
+- When the board attains a cyclic entanglement state, every 
+	mark connected within/to the cycle must 'collapse', that is,
+	turn back into classical states. In the example above, X 
+	played the last move on cells (0,0) and (1,0), forming a 
+	cycle. Then on the next move, O must choose one of the
+	positions where X played the cycle-forming move, to begin 
+	the so-called collapse procedure. 
+
+- Collapse Procedure: Using the same example as above, let us 
+	say that O chooses cell (0,0) to run collapse. Then O has
+	chosen x3 from (0,0) to take over that cell. Each cell may
+	only hold upto one mark in classical state, x1 dies
+
 
 - The game terminates either if the goal is satisfied or every cell on the board evaluates.
 

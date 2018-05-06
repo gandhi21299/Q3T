@@ -128,7 +128,6 @@ class Server:
             
             for line in file:
                 line = line.strip()
-                print(line)
 
                 # Set board size and create an instance of
                 # the server.
@@ -156,23 +155,18 @@ class Server:
 
                         # assign the move where the board 
                         # was saved from.
+                        # NOT WORKING
                         if len(strList) == 2:
                             if strList[1] == '<---':
                                 currMoveStr = move.__str__()
 
-                        # check if the current move was played
-                        # higher in the tree.
-                        count = prevDepth - currDepth + 1
-                        while count:
-                            if server.game.movesTree.move.isCollapse():
+                        if prevDepth >= currDepth:
+                            print(move, server.game.movesTree.move)
+                            while move.markValue != server.game.movesTree.move.markValue:
                                 server.previousMove()
-                                if move.isCollapse():
-                                    collapsing = False
-                                    break
 
-                            else:
-                                server.previousMove()
-                                count -= 1
+                            server.previousMove()
+
                         prevDepth = currDepth
 
                         # update server by playing the move.
@@ -195,16 +189,15 @@ class Server:
         
         # otherwise, assign server to self.
         else:
-
-            # set movesTree at currMove
-            server.game.resetTree(currMoveStr)
-
             # set information in self to the information
             # stored in server
             self.posList = server.posList[:]
             self.game = server.game
             self.moveNum = server.moveNum
             self.curr_state = server.curr_state
+
+            # set movesTree at currMove
+            self.game.resetTree(currMoveStr)
 
             print('Game loaded from '+filePath)
 
@@ -254,10 +247,7 @@ if __name__ == '__main__':
         elif inList[0] == 'random':
 
             '''
-            TO FIX: A random call should play a full legal
-            random move.
-
-            A collapse move is breaking a cycle + a play move.
+            Implementation of a built-in random player.
             '''
 
             def randCollapse(posList):
