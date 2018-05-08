@@ -91,20 +91,15 @@ For example, X plays on (3,1) and (3,3). Following, O plays on
 	the so-called collapse procedure. 
 
 - Collapse Procedure: Using the same example as above, let us 
-	say that O chooses cell (0,0) to run collapse. Then O has
+	say that O chooses cell (0,0) to run collapse from. Then O has
 	chosen x3 from (0,0) to take over that cell. Each cell may
-	only hold upto one mark in classical state, x1 dies
+	only hold upto one mark in classical state, hence every other
+  quantum mark is destroyed because of the collapse. In this 
+  example, collapse of x3 causes x1 to be destroyed. 
 
+  Now recursively collapse each destroyed quantum mark in their
+  respective 'twin' cells. For instance, since x1 was destroyed
+  in (0,0), x1 collapses in (0,1). Consequently, o2 is destroyed
+  in (0,1) while take over the cell (1,0). The collapse calls
+  terminate once each mark involved in the cycle are collapsed.
 
-- The game terminates either if the goal is satisfied or every cell on the board evaluates.
-
-- Bonus Points: 
-	(1) A row, column or diagonal with three marks is worth 1 point. 
-	
-	(2) A 2 x 2 board completely evaluated with the same mark is worth 2 points to that player. 
-
-	(3) A row, column or diagonal with four marks is worth 20 points.
-
-- Game terminates when case (3) satisfies above. Suppose two players satisfies (3), then the player with the row/column/diagonal that has the minimum sum of the move number, appended to each mark in that row/column/diagonal, earns 15 points. The opponent earns 5 points. If the game ends in a draw, each player earns 10 points.
-
-- Goal: Maximize your total points.

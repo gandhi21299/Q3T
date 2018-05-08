@@ -161,7 +161,6 @@ class Server:
                                 currMoveStr = move.__str__()
 
                         if prevDepth >= currDepth:
-                            print(move, server.game.movesTree.move)
                             while move.markValue != server.game.movesTree.move.markValue:
                                 server.previousMove()
 
@@ -176,7 +175,6 @@ class Server:
                             else:
                                 collapsing = True
                                 server.update(move.posList[0])
-                                print('collapse: ', move)
                         else:
                             collapsing = False
                             server.update(move.posList[0])
