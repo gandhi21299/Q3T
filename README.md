@@ -11,6 +11,7 @@ tic-tac-toe in which the players' moves are
 superpositions of plays in the classical game. 
 
 Properties:
+    
     - Superposition: the ability of quantum objects to be 
     in two places at once.
 
@@ -115,7 +116,7 @@ Gameplay
     Now recursively collapse each destroyed quantum mark in their
     respective 'twin' cells. For instance, since x1 was destroyed
     in (0,0), x1 collapses in (0,1). Consequently, o2 is destroyed
-    in (0,1) while take over the cell (1,0). The collapse calls
+    in (0,1) will take over the cell (1,0). The collapse calls
     terminate once each mark involved in the cycle are collapsed.
 
 Program utility
@@ -154,3 +155,11 @@ Server commands:
 
 - exit
     exits the game.
+    
+The point system
+Like any game, quantum tic-tac-toe also has an end. One player wins and other looses.
+The point system is as follows:
+  - The point of a player = sum of degree of each of the stable cell owned by it.
+     degree of cell is defined as the number of stable cell, with the same mark, it is adjacent to.
+     
+        
