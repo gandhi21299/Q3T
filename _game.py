@@ -1,4 +1,6 @@
-
+'''
+TODO: scores to be stored in the movesTree.
+'''
 
 from _move import Move, MoveNode
 from util import *
