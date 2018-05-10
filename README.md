@@ -11,10 +11,6 @@ tic-tac-toe in which the players' moves are
 superpositions of plays in the classical game. 
 
 Properties:
-<<<<<<< HEAD
-=======
-    
->>>>>>> d47a54c8ae48ae54b3c045a0fa6126192d7381fd
     - Superposition: the ability of quantum objects to be 
     in two places at once.
 
@@ -119,9 +115,35 @@ Gameplay
     Now recursively collapse each destroyed quantum mark in their
     respective 'twin' cells. For instance, since x1 was destroyed
     in (0,0), x1 collapses in (0,1). Consequently, o2 is destroyed
-<<<<<<< HEAD
     in (0,1) while take over the cell (1,0). The collapse calls
     terminate once each mark involved in the cycle are collapsed.
+    The following state is obtained:
+
+
+      0            1            2            3
+    ----------------------------------------------------
+   |             |            |            |            |
+0  |      \/     |     \/     |            |            |  0
+   |      /\     |     /\     |            |            |
+   |             |            |            |            |
+    ----------------------------------------------------
+   |      __     |            |            |            |
+1  |     |  |    |            |            |            |  1
+   |     |__|    |            |            |            |
+   |             |            |            |            |
+    ----------------------------------------------------
+   |             |            |            |            |
+2  |             |            |            |            |  2
+   |             |            |            |            |
+   |             |            |            |            |
+    ----------------------------------------------------
+   |             |            |            |            |
+3  |             |            |            |            |  3
+   |             |            |            |            |
+   |             |            |            |            |
+    ----------------------------------------------------
+      0            1            2            3
+
 
 Point systems:
 -----------------------------------------------------------------
@@ -141,11 +163,6 @@ Point systems:
     then the point system is applied over n-1, n-2, and so on; until
     a winner is determined.
 
-=======
-    in (0,1) will take over the cell (1,0). The collapse calls
-    terminate once each mark involved in the cycle are collapsed.
-
->>>>>>> d47a54c8ae48ae54b3c045a0fa6126192d7381fd
 Program utility
 -----------------------------------------------------------------
 Use 'python3 server.py <n>' to initialize the game with a board
@@ -181,16 +198,4 @@ Server commands:
     random player plays k moves.
 
 - exit
-<<<<<<< HEAD
     exits the game.
-=======
-    exits the game.
-    
-The point system
-Like any game, quantum tic-tac-toe also has an end. One player wins and other looses.
-The point system is as follows:
-  - The point of a player = sum of degree of each of the stable cell owned by it.
-     degree of cell is defined as the number of stable cell, with the same mark, it is adjacent to.
-     
-        
->>>>>>> d47a54c8ae48ae54b3c045a0fa6126192d7381fd

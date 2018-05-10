@@ -82,10 +82,14 @@ def computeLongestKrist(game):
     Returns the longest krist in game.board.
     '''
     
-    maxn = {'x':0, 'o':0}
+    maxn = dict()
+    maxn['x'] = list()
+    maxn['o'] = list()
+    for n in range(1, game.board_size+1):
+        maxn['x'].append([n, 0])
+        maxn['o'].append([n, 0])
     
     for row in range(game.board_size):
-        n = 0
         for col in range(game.board_size):
             if game.board[(row,col)].stable:
                 mark = game.board[(row,col)].stable[0]
@@ -101,7 +105,7 @@ def computeLongestKrist(game):
                         break
 
                     c += 1
-                maxn[mark] = max(maxn[mark], c - col)
+                maxn[mark][c-col-1][1] += 1
 
                 # check vertical krist
                 r = row+1
@@ -109,12 +113,10 @@ def computeLongestKrist(game):
                     
                     if game.board[(r,col)].stable is None:
                         break
-                    
                     if game.board[(r,col)].stable[0] != mark:
                         break
-
                     r += 1
-                maxn[mark] = max(maxn[mark], r - row)
+                maxn[mark][r-row-1][1] += 1
 
                 # check diagonal krist topleft - bottom right
                 r = row+1
@@ -128,7 +130,7 @@ def computeLongestKrist(game):
 
                     r += 1
                     c += 1
-                maxn[mark] = max(maxn[mark], r - row)
+                maxn[mark][r-row-1][1] += 1
 
                 # check diagonal krist top right - bottom left
                 r = row+1
@@ -142,6 +144,17 @@ def computeLongestKrist(game):
 
                     r += 1
                     c -= 1
-                maxn[mark] = max(maxn[mark], r - row)
+                
+                maxn[mark][r-row-1][1] += 1
 
-    return maxn
+    
+    i = 0
+    while maxn['o'][i][1] != 0 or maxn['x'][i][1] != 0:
+        i += 1
+
+        if i > game.board_size-1:
+            break
+
+    i -= 1
+
+    return (maxn['x'][i][0]*maxn['x'][i][1], maxn['o'][i][0]*maxn['o'][i][1])
