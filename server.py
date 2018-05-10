@@ -242,6 +242,9 @@ if __name__ == '__main__':
         elif inList[0] == 'load':
             server.loadGame(inList[1])
 
+        elif inList[0] == 'krist':
+            print(computeLongestKrist(server.game))
+
         elif inList[0] == 'random':
 
             '''

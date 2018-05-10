@@ -170,6 +170,9 @@ class Game:
         if collapse:
             if pos in self.movesTree.move.posList:
                 self.evaluateCell(move)
+                scores = computeLongestKrist(self)
+                self.score['x'] = scores['x']
+                self.score['o'] = scores['o']
             else:
                 print('Error: Illegal move at ({0},{1}) to begin collapse.'.format(pos[0], pos[1]))
                 return False
@@ -250,9 +253,6 @@ class Game:
 
         # Assign the classical state of the target cell.
         self.board[move.posList[0]].stable = move.markValue
-
-        # Update the score.
-        self.score[move.markValue[0]] += 2*self.degree(move.posList[0])
 
         # For each mark in 'marksList', find their respective twin location.
         # Recursively play a collapse move on that cell.
@@ -339,7 +339,6 @@ class Game:
                         posList.append((row,col))
 
             return posList
-
 
     def neighbourhoodCells(self, pos):
         nbd_cells = list()

@@ -118,6 +118,24 @@ Gameplay
     in (0,1) while take over the cell (1,0). The collapse calls
     terminate once each mark involved in the cycle are collapsed.
 
+Point systems:
+-----------------------------------------------------------------
+1. Standard
+
+    Define a krist as a set of stable marks of the same type 
+    horizointally, vertically or diagonally. The length of a 
+    krist is defined as the number of stable marks involved in
+    that krist, denote the krist as an n-krist where n is the 
+    length of the krist.
+
+    Goal: Construct a krist with the longest length possible.
+
+    The player to create the longest krist wins. Now suppose both
+    players form n-krists. Then the player with higher number of
+    n-krists wins. Moreover, if both players construct k n-krists,
+    then the point system is applied over n-1, n-2, and so on; until
+    a winner is determined.
+
 Program utility
 -----------------------------------------------------------------
 Use 'python3 server.py <n>' to initialize the game with a board

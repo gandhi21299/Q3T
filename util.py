@@ -76,3 +76,72 @@ def printBoard(game):
     print()
     
     print('SCORES: X = '+str(game.score['x'])+' O = '+str(game.score['o']))
+
+def computeLongestKrist(game):
+    '''
+    Returns the longest krist in game.board.
+    '''
+    
+    maxn = {'x':0, 'o':0}
+    
+    for row in range(game.board_size):
+        n = 0
+        for col in range(game.board_size):
+            if game.board[(row,col)].stable:
+                mark = game.board[(row,col)].stable[0]
+
+                # check horizontal krist
+                c = col+1
+                while c < game.board_size:
+                    
+                    if game.board[(row,c)].stable is None:
+                        break
+                    
+                    if game.board[(row,c)].stable[0] != mark:
+                        break
+
+                    c += 1
+                maxn[mark] = max(maxn[mark], c - col)
+
+                # check vertical krist
+                r = row+1
+                while r < game.board_size:
+                    
+                    if game.board[(r,col)].stable is None:
+                        break
+                    
+                    if game.board[(r,col)].stable[0] != mark:
+                        break
+
+                    r += 1
+                maxn[mark] = max(maxn[mark], r - row)
+
+                # check diagonal krist topleft - bottom right
+                r = row+1
+                c = col+1
+                while r < game.board_size and c < game.board_size:
+                    if game.board[(r,c)].stable is None:
+                        break
+                    
+                    if game.board[(r,c)].stable[0] != mark:
+                        break
+
+                    r += 1
+                    c += 1
+                maxn[mark] = max(maxn[mark], r - row)
+
+                # check diagonal krist top right - bottom left
+                r = row+1
+                c = col-1
+                while r < game.board_size and c >= 0:
+                    if game.board[(r,c)].stable is None:
+                        break
+                    
+                    if game.board[(r,c)].stable[0] != mark:
+                        break
+
+                    r += 1
+                    c -= 1
+                maxn[mark] = max(maxn[mark], r - row)
+
+    return maxn
