@@ -170,9 +170,9 @@ class Game:
         if collapse:
             if pos in self.movesTree.move.posList:
                 self.evaluateCell(move)
-                scores = computeLongestKrist(self)
-                self.score['x'] = scores['x']
-                self.score['o'] = scores['o']
+                kristLens = computeLongestKrist(self)
+                self.score['x'] = kristLens['x']
+                self.score['o'] = kristLens['o']
             else:
                 print('Error: Illegal move at ({0},{1}) to begin collapse.'.format(pos[0], pos[1]))
                 return False
