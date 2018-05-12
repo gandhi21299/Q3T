@@ -31,12 +31,17 @@ class Move:
         '''
         inStrList = inStr.split('-')
         self.markValue = inStrList[0]
+        if not self.markValue in 'xo':
+            return False
+
         self.posList = list()
         self.posList.append( ( int(inStrList[1]), int(inStrList[2]) ) )
 
         if len(inStrList) == 5:
             self.posList.append( ( int(inStrList[3]), 
                 int(inStrList[4]) ) )
+
+        return True
 
 class TypeError(Exception):
     def __init__(self, msg):

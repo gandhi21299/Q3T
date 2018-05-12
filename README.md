@@ -6,14 +6,14 @@ Author: Computing Numbers
 
 Game description
 -----------------------------------------------------------------
-Quantum tic-tac-toe is a 'quantum generalization' of 
-tic-tac-toe in which the players' moves are 
-superpositions of plays in the classical game. 
 
-Properties:
+    Quantum tic-tac-toe is a 'quantum generalization' of 
+    tic-tac-toe in which the players' moves are 
+    superpositions of plays in the classical game. 
+
     - Superposition: the ability of quantum objects to be 
     in two places at once.
-
+    
     - Entanglement:  the phenomenon where distant parts 
     of a quantum system display correlations that 
     cannot be explained by either timelike causality 
@@ -24,6 +24,7 @@ Properties:
 
 Gameplay
 -----------------------------------------------------------------
+    
     - Quantum tic-tac-toe is played on a square board. 
     Denote n as the number of rows/columns. 
     Initially the board is empty.
@@ -147,7 +148,7 @@ Gameplay
 
 Point systems:
 -----------------------------------------------------------------
-1. Standard
+    1. Standard
 
     Define a krist as a set of stable marks of the same type 
     horizointally, vertically or diagonally. The length of a 
@@ -171,31 +172,31 @@ of size n. (Ignore the angled-brackets)
 Ignorance of <n> will yeild a board with size 4, that is, using 
 'python3 server.py' instead.
 
-Server commands:
-- play <R1> <C1> <R2> <C2> 
-    to play at positions (R1, C1) and 
-    (R2, C2).
+    Server commands:
+    - play <R1> <C1> <R2> <C2> 
+        to play at positions (R1, C1) and 
+        (R2, C2).
 
-- play <R1> <C1> 
-    to play at position (R1, C1).
+    - play <R1> <C1> 
+        to play at position (R1, C1).
 
-- undo
-    to undo the last move.
+    - undo
+        to undo the last move.
 
-- undo <k>
-    undo k moves back, if at least k moves have already been played.
+    - undo <k>
+        undo k moves back, if at least k moves have already been played.
 
-- tree
-    view game.movesTree
+    - tree
+        view game.movesTree
 
-- save <file-path>
-    saves game to the provided file path.
+    - save <file-path>
+        saves game to the provided file path.
 
-- load <file-path>
-    loads game from the indicated file path.
+    - load <file-path>
+        loads game from the indicated file path.
 
-- random <k>
-    random player plays k moves.
+    - random <k>
+        random player plays k moves.
 
-- exit
-    exits the game.
+    - exit
+        exits the game.

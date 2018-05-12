@@ -131,7 +131,8 @@ class Server:
 
                 # Set board size and create an instance of
                 # the server.
-                if line[0:4] == 'SIZE':
+                # format: SIZE=<n>
+                if line[0:5] == 'SIZE=':
                     server = Server(int(line[5]))
 
                 # Start reading the game.
@@ -151,11 +152,12 @@ class Server:
 
                         # create move object
                         move = Move()
-                        move.read(moveStr)
+                        if not move.read(moveStr):
+                            errorDetected = True
+                            break
 
                         # assign the move where the board 
                         # was saved from.
-                        # NOT WORKING
                         if len(strList) == 2:
                             if strList[1] == '<---':
                                 currMoveStr = move.__str__()
@@ -214,9 +216,10 @@ if __name__ == '__main__':
     while True:
         print('Server state:', server.curr_state)
         print('movesTree.move =', server.game.movesTree.move)
-        
         inList = input('[{}] '.format(server.moveNum)).split()
+        
         if inList[0] == 'play':
+            
             pos0 = (int(inList[1]), int(inList[2]))
             server.update(pos0)
             
@@ -243,7 +246,6 @@ if __name__ == '__main__':
             server.loadGame(inList[1])
 
         elif inList[0] == 'random':
-
             '''
             Implementation of a built-in random player.
             '''

@@ -19,8 +19,8 @@ def printBoard(game):
             # draw an evaluated mark
             if game.board[(row,col)].stable[0] == 'x':
                 if k == 3  :  print("            |", end="")
-                elif k == 6:  print("     \/     |", end="")
-                elif k == 9:  print("     /\     |", end="")
+                elif k == 6:  print("    \\/     |", end="")
+                elif k == 9:  print("     /\\    |", end="")
                 else       :  print("            |", end="")
 
             elif game.board[(row,col)].stable[0] == 'o':
