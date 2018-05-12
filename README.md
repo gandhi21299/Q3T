@@ -209,3 +209,5 @@ TODO:
 
     - Formulate outcomes from this game to answer the 
     minimum spanning tree problem.
+    
+    - File handling error-check/correction codes.
