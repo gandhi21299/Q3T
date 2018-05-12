@@ -200,3 +200,14 @@ Ignorance of <n> will yeild a board with size 4, that is, using
 
     - exit
         exits the game.
+
+TODO:
+-----------------------------------------------------------------
+    
+    - Set up a multithreading interactive interface to support
+    computer game playing.
+
+    - Discover heuristics to 'solve' the game.
+
+    - Formulate outcomes from this game to answer the 
+    minimum spanning tree problem.
