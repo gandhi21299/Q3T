@@ -100,8 +100,6 @@ class Game:
         moveNode 'movesTree' and stores 'move'. Sets the parent of 
         the new moveNode to 'movesTree'. Updates 'movesTree'.
         '''
-
-
         def update_pos_order(posList):
             if self.getCellIndex(posList[1]) < self.getCellIndex(posList[0]):
                 tmp = posList[0]
@@ -167,9 +165,6 @@ class Game:
         if collapse:
             if pos in self.movesTree.move.posList:
                 self.evaluateCell(move)
-                kristLens = computeLongestKrist(self)
-                self.score['x'] = kristLens[0]
-                self.score['o'] = kristLens[1]
             else:
                 print('Error: Illegal move at ({0},{1}) to begin collapse.'.format(pos[0], pos[1]))
                 return False

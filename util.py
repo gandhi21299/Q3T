@@ -19,8 +19,8 @@ def printBoard(game):
             # draw an evaluated mark
             if game.board[(row,col)].stable[0] == 'x':
                 if k == 3  :  print("            |", end="")
-                elif k == 6:  print("    \\/     |", end="")
-                elif k == 9:  print("     /\\    |", end="")
+                elif k == 6:  print("     \/     |", end="")
+                elif k == 9:  print("     /\     |", end="")
                 else       :  print("            |", end="")
 
             elif game.board[(row,col)].stable[0] == 'o':
@@ -74,13 +74,32 @@ def printBoard(game):
     printColNumbers()
     print()
     print()
-    
-    print('SCORES: X = '+str(game.score['x'])+' O = '+str(game.score['o']))
 
 def computeLongestKrist(game):
     '''
     Returns the longest krist in game.board.
+
+    NEED TO TEST
     '''
+
+    def checkKrist(row, col, changePos, mark):
+
+        count = 0
+        while row in range(0,game.board_size) and col in range(0,game.board_size):
+            if game.board[(row,col)].stable is None:
+                break
+
+            if game.board[(row,col)].stable[0] != mark:
+                break
+
+            row += changePos[0]
+            col += changePos[1]
+
+            count += 1
+        print('Count = {0} end = {1} {2} change = {3} {4}'.format(count, row, col, changePos[0], changePos[1]))
+        return count
+
+        
     
     maxn = dict()
     maxn['x'] = list()
@@ -95,57 +114,68 @@ def computeLongestKrist(game):
                 mark = game.board[(row,col)].stable[0]
 
                 # check horizontal krist
-                c = col+1
-                while c < game.board_size:
+                # c = col+1
+                # while c < game.board_size:
                     
-                    if game.board[(row,c)].stable is None:
-                        break
+                #     if game.board[(row,c)].stable is None:
+                #         break
                     
-                    if game.board[(row,c)].stable[0] != mark:
-                        break
+                #     if game.board[(row,c)].stable[0] != mark:
+                #         break
 
-                    c += 1
-                maxn[mark][c-col-1][1] += 1
+                #     c += 1
+
+                count = checkKrist(row, col+1 , [0,1], mark)
+                maxn[mark][count][1] += 1
+
+                count = checkKrist(row+1, col , [1,0], mark)
+                maxn[mark][count][1] += 1
+                
+                count = checkKrist(row+1, col+1 , [1,1], mark)
+                maxn[mark][count][1] += 1
+
+                count = checkKrist(row+1, col-1 , [1,-1], mark)
+                maxn[mark][count][1] += 1
 
                 # check vertical krist
-                r = row+1
-                while r < game.board_size:
+                # r = row+1
+                # while r < game.board_size:
                     
-                    if game.board[(r,col)].stable is None:
-                        break
-                    if game.board[(r,col)].stable[0] != mark:
-                        break
-                    r += 1
-                maxn[mark][r-row-1][1] += 1
+                #     if game.board[(r,col)].stable is None:
+                #         break
+                #     if game.board[(r,col)].stable[0] != mark:
+                #         break
+                #     r += 1
+                # maxn[mark][r-row-1][1] += 1
 
-                # check diagonal krist topleft - bottom right
-                r = row+1
-                c = col+1
-                while r < game.board_size and c < game.board_size:
-                    if game.board[(r,c)].stable is None:
-                        break
+                # # check diagonal krist topleft - bottom right
+                # r = row+1
+                # c = col+1
+                # while r < game.board_size and c < game.board_size:
+                #     if game.board[(r,c)].stable is None:
+                #         break
                     
-                    if game.board[(r,c)].stable[0] != mark:
-                        break
+                #     if game.board[(r,c)].stable[0] != mark:
+                #         break
 
-                    r += 1
-                    c += 1
-                maxn[mark][r-row-1][1] += 1
+                #     r += 1
+                #     c += 1
+                # maxn[mark][r-row-1][1] += 1
 
-                # check diagonal krist top right - bottom left
-                r = row+1
-                c = col-1
-                while r < game.board_size and c >= 0:
-                    if game.board[(r,c)].stable is None:
-                        break
+                # # check diagonal krist top right - bottom left
+                # r = row+1
+                # c = col-1
+                # while r < game.board_size and c >= 0:
+                #     if game.board[(r,c)].stable is None:
+                #         break
                     
-                    if game.board[(r,c)].stable[0] != mark:
-                        break
+                #     if game.board[(r,c)].stable[0] != mark:
+                #         break
 
-                    r += 1
-                    c -= 1
+                #     r += 1
+                #     c -= 1
                 
-                maxn[mark][r-row-1][1] += 1
+                # maxn[mark][r-row-1][1] += 1
 
     
     i = 0
@@ -156,5 +186,8 @@ def computeLongestKrist(game):
             break
 
     i -= 1
+
+    print('x',maxn['x'])
+    print('o',maxn['o'])
 
     return (maxn['x'][i][0]*maxn['x'][i][1], maxn['o'][i][0]*maxn['o'][i][1])

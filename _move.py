@@ -26,22 +26,26 @@ class Move:
         '''
         provided input 'inStr', parses 'inStr' into markValue and
         posList. Assumes 'inStr' follows the parsing rules.
-
-        NEED TO IMPLEMENT ERROR-CHECK.
         '''
         inStrList = inStr.split('-')
-        self.markValue = inStrList[0]
-        if not self.markValue in 'xo':
-            return False
 
+        # set markValue
+        self.markValue = inStrList[0]
+
+        # set positions
         self.posList = list()
         self.posList.append( ( int(inStrList[1]), int(inStrList[2]) ) )
 
+        # if not a collapse move, set the second position
         if len(inStrList) == 5:
             self.posList.append( ( int(inStrList[3]), 
                 int(inStrList[4]) ) )
 
-        return True
+    def getMark(self):
+        '''
+        Assumes the move has been read already.
+        '''
+        return self.markValue
 
 class TypeError(Exception):
     def __init__(self, msg):
