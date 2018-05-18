@@ -1,7 +1,18 @@
 
+'''
+game.py implements the algorithms required for running the game.
+
+Features:
+- board representation.
+- state transitions.
+- movesTree updates.
+- cycle detection.
+- 'cycle collapse' algorithm.
+- depth-first traversals to write tree to stdio/file and resetting
+    a tree to some position.
+'''
+
 from _move import Move, MoveNode
-from util import *
-import random
 
 # -------------------------------------------------------------------
 # Implementation of the Union Find Data Structure. Uses path
@@ -331,24 +342,5 @@ class Game:
                         posList.append((row,col))
 
             return posList
-
-    def neighbourhoodCells(self, pos):
-        nbd_cells = list()
-        for i in [-1,0,1]:
-            for j in [-1,0,1]:
-                if (i or j):
-                    if(self.isValidCell((pos[0] + i, pos[1] + j)) and self.board[(pos[0] + i, pos[1] + j)].stable is not None):
-                        nbd_cells.append((pos[0] + i, pos[1] + j))
-        return nbd_cells
-    
-    def degree(self, pos):
-        deg = 0
-        for n_cell in self.neighbourhoodCells(pos):
-            if (self.board[n_cell].stable[0] == self.board[pos].stable[0]):
-                deg += 1
-        return deg 
-
-    def isValidCell(self, pos):
-        return not (pos[0] < 0 or pos[0] >= self.board_size or pos[1] < 0 or pos[1] >= self.board_size)
 
 # -------------------------------------------------------------------

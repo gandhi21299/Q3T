@@ -1,3 +1,8 @@
+'''
+_move.py implements classes storing information about
+an action in the game.
+'''
+
 class Move:
     def __init__(self, markValue = None, posList = None):
         '''
