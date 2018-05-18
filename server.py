@@ -321,11 +321,11 @@ class Server:
         if cmdList[0] == 'play':
 
             # play a move
-            pos = (int(cmdList[1]), int(inList[2]))
+            pos = (int(cmdList[1]), int(cmdList[2]))
             server.update(pos)
 
             if len(cmdList) == 5:
-                pos = (int(cmdList[3]), int(inList[4]))
+                pos = (int(cmdList[3]), int(cmdList[4]))
                 server.update(pos)
 
         elif cmdList[0] == 'undo':
